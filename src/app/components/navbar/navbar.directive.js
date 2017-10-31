@@ -1,15 +1,9 @@
-(function() {
-  'use strict';
+/** @ngInject */
+function wudNavbar() {
+  return {
+    restrict: 'E',
+    template: require('./navbar.html')
+  };
+}
 
-  angular
-    .module('wud.techtest')
-    .directive('wudNavbar', wudNavbar);
-
-  /** @ngInject */
-  function wudNavbar() {
-    return {
-      restrict: 'E',
-      templateUrl: 'app/components/navbar/navbar.html'
-    };
-  }
-})();
+module.exports = wudNavbar;

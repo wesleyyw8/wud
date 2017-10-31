@@ -1,14 +1,5 @@
-(function() {
-  'use strict';
-
-  angular
-    .module('wud.techtest')
-    .config(config);
-
-  /** @ngInject */
-  function config($logProvider) {
-    // Enable log
-    $logProvider.debugEnabled(true);
-  }
-
-})();
+/*@ngInject*/
+function config($locationProvider) {
+  $locationProvider.html5Mode(false);
+}
+module.exports = config;

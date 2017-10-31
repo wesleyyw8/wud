@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-gb" ng-app="wud.techtest" ng-strict-di>
+
+<head>
+  <meta charset="UTF-8">
+  <title>wud.techtest</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <base href="/">
+  <% for (var chunk in htmlWebpackPlugin.files.css) { %>
+    <link href="styles<%= htmlWebpackPlugin.files.css[chunk].substr(htmlWebpackPlugin.files.css[chunk].lastIndexOf('/')) %>"
+      rel="stylesheet" type="text/css">
+    <% } %>
+</head>
+
+<body>
+  <div ui-view></div>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry.includes('localhost') ? htmlWebpackPlugin.files.chunks[chunk].entry : 'scripts' + htmlWebpackPlugin.files.chunks[chunk].entry.substr(htmlWebpackPlugin.files.chunks[chunk].entry.lastIndexOf('/')) %>"></script>
+    <% } %>
+</body>
+
+</html>

@@ -1,7 +1,12 @@
-(function() {
-  'use strict';
+import angular from 'angular';
+import 'babel-polyfill';
+import 'angular-ui-bootstrap';
+import 'angular-ui-router';
 
-  angular
-    .module('wud.techtest', ['ui.router', 'ui.bootstrap']);
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
 
-})();
+angular
+  .module('wud.techtest', [require('./components/components.module.js'), require('./states/states.module.js')])
+  .config(require('./index.config.js'));
+module.exports = 'wud.techtest';

@@ -23,9 +23,9 @@ app.get('/users', function(req, res) {
   res.json(cache.users);
 });
 
-app.post('/user', function(req, res) {
+app.post('/users', function(req, res) {
   cache = read();
-  console.log('POST /user');
+  console.log('POST /users');
   console.log(req.body);
   var user = req.body;
   var validation = {

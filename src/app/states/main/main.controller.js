@@ -1,11 +1,3 @@
-(function() {
-  'use strict';
-
-  angular
-    .module('wud.techtest')
-    .controller('MainController', MainController);
-
-  /** @ngInject */
-  function MainController() {
-  }
-})();
+/** @ngInject */
+function MainController() {}
+module.exports = MainController;
