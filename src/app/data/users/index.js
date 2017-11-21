@@ -1,12 +1,15 @@
 const url = 'http://localhost:8000/users';
 
 export const getUsers = () => {
-  fetch(url, {
-    method: 'get',
-    mode: 'no-cors'
-  })
-  .then(response => { 
-    return response;
-  })
-  .then(data => data);
+  return new Promise((resolve, reject) => {
+    return fetch(url, {
+      method: 'GET'
+    })
+    .then(response => { 
+      return response.json();
+    })
+    .then(data => {
+      resolve(data);
+    });
+  });
 }
