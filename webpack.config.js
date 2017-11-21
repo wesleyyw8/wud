@@ -22,17 +22,17 @@ var config = {
   },
   module: {
     loaders: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        options: {
-          failOnWarning: false,
-          failOnError: false,
-          fix: true
-        }
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.js$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /node_modules/,
+      //   options: {
+      //     failOnWarning: false,
+      //     failOnError: false,
+      //     fix: true
+      //   }
+      // },
       {
         test: /\.html$/,
         loader: 'html-loader'
@@ -69,7 +69,10 @@ var config = {
     }
   },
   resolve: {
-    modules: ['node_modules']
+    modules: ['node_modules'],
+    alias: {
+      data: path.resolve(__dirname, 'src/app/data')
+    },
   },
   watchOptions: {
     ignored: /node_modules/,

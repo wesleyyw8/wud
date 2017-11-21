@@ -1,8 +1,13 @@
 /** @ngInject */
-function wudNavbar() {
+const wudNavbar = $state => {
   return {
     restrict: 'E',
-    template: require('./navbar.html')
+    template: require('./navbar.html'),
+    link: (scope) => {
+      scope.navLinks = $state.get().filter((link) => 
+        link.abstract !== true
+      );
+    }
   };
 }
 

@@ -9,13 +9,15 @@ function routerConfig($stateProvider, $urlRouterProvider) {
       url: '/',
       template: require('./main/home/home.html'),
       controller: 'HomeController',
-      controllerAs: 'home'
+      controllerAs: 'home',
+      customName: 'Home' 
     })
     .state('main.users', {
       url: '/users',
       template: require('./main/users/users.html'),
       controller: 'UsersController',
-      controllerAs: 'users'
+      controllerAs: 'users',
+      customName: 'Users' 
     });
 
   $urlRouterProvider.otherwise('/');
