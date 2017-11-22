@@ -2,15 +2,15 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var fs = require('fs');
 var app = express();
+const methodOverride = require('method-override')
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride());
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
@@ -65,6 +65,5 @@ app.post('/users', function(req, res) {
   });
   write();
 
-  res.status(200);
-  res.send();
+  res.status(200).json({yo: 'yo'});
 });

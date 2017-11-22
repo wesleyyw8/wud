@@ -1,3 +1,4 @@
+
 const url = 'http://localhost:8000/users';
 
 export const getUsers = () => {
@@ -20,14 +21,17 @@ export const createUser = (user) => {
   return new Promise((resolve) => {
     return fetch(url, {
       method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
       body: user
     })
+    .then(resp => resp.json())
     .then(response => { 
-      console.log(response);
-      return response;
+      console.log(response)
+      resolve(response);
     })
-    .then(data => {
-      resolve(data);
-    });
+
   });
 }
