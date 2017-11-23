@@ -16,22 +16,47 @@ export const getUsers = () => {
 }
 
 export const createUser = (user) => {
-  user = JSON.stringify(user);
-  console.log(user);
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     return fetch(url, {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: user
+      body: JSON.stringify(user)
     })
-    .then(resp => resp.json())
+    .then(resp => {
+      if (resp.status !== 200) {
+        throw('error on create user');
+      }
+      return resp.json()
+    })
     .then(response => { 
-      console.log(response)
       resolve(response);
     })
+    .catch( err => {
+      reject(err);
+    });
+  });
+}
 
+export const deleteUser = (userId) => {
+  return new Promise((resolve, reject) => {
+    return fetch(`${url}/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(resp => {
+      if (resp.status !== 200) {
+        throw('error on delete user');
+      }
+      return resp.json()
+    })
+    .then(response => { 
+      resolve(response);
+    })
   });
 }

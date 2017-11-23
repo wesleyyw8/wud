@@ -2,18 +2,16 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var fs = require('fs');
 var app = express();
-const methodOverride = require('method-override')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride());
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
 
 var cache;
 
@@ -21,8 +19,8 @@ function read() {
   return JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf8'));
 }
 
-function write() {
-  fs.writeFileSync(`${__dirname}/users.json`, JSON.stringify(cache));
+function write(newList) {
+  fs.writeFileSync(`${__dirname}/users.json`, newList ? JSON.stringify(newList) : JSON.stringify(cache));
 }
 
 app.listen(8000);
@@ -65,5 +63,20 @@ app.post('/users', function(req, res) {
   });
   write();
 
-  res.status(200).json({yo: 'yo'});
+  res.status(200).json({response: 'user created successfully!'});
 });
+
+
+app.delete('/users/:id', function (req, res) {
+  const id = req.param('id');
+
+  let response = read();
+
+  for(var i=0; i < response.users.length; i++) {
+    if (response.users[i].id == id){
+      response.users.splice(i,1);
+    }
+  }
+  write(response);
+  res.status(200).json({response: response});
+})
